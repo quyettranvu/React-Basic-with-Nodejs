@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*Sign up*/
+@import url("./components/Signup/sign_up.css");
+
+/*Log in*/
+@import url("./components/Login/login.css");
+
+/*Mainpage*/
+@import url("./components/MainPage/mainpage.css");
+
+/*Update User*/
+@import url("./components//UpdateUser/updateuser.css");

@@ -1,0 +1,170 @@
+/*Header*/
+.navbar {
+	width: 100%;
+	height: 70px;
+	background-color: #3bb19b;
+	display: flex;
+	align-items: center;
+}
+
+.navbar h1{
+	color: white;
+	font-size: 25px;
+	margin-right:10px;
+	margin-left:20px;
+}
+
+.navbar h3{
+	color: white;
+	font-size: 25px;
+	margin-right:500px;
+}
+
+.navbar h2{
+	color: white;
+	font-size: 25px;
+	margin-right:-1000px;
+}
+
+.white_btn_in {
+	border: none;
+	outline: none;
+	padding: 12px 0;
+	background-color: white;
+	border-radius: 20px;
+	width: 120px;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+	margin-right:20px;
+	margin-left:1500px;
+}
+
+/*Main Content*/
+.site-main{
+	margin-top:6em;
+	text-align:center;
+	margin-left:100px;
+}
+
+/*Form for datas*/
+table{
+	border-spacing:0px;
+	width:90%;
+}
+
+table td, table th{
+	padding:.75em;
+	vertical-align: top;
+	border-top:1px solid black;
+}
+
+.click-update{
+	border:0.5px solid green;
+	font-size:1.1em;
+	background:greenyellow;
+}
+
+.click-delete{
+	margin-left:10px;
+	border:0.5px solid green;
+	font-size:1.1em;
+	background:red;
+}
+
+.click-update:hover{
+	background-blend-mode: darken;
+}
+
+.click-delete:hover{
+	background-blend-mode: darken;
+}
+
+table tbody tr:hover{
+	background-color:#06d6a0;
+}
+
+.icon-additional{
+	position:absolute;
+	margin-left:10px;
+	size:100px;
+}
+
+.icon-additional:hover{
+	color:red;
+}
+
+.icon-second-additional{
+	margin-left:10px;
+}
+
+.icon-second-additional:hover{
+	color:red;
+}
+
+/*Search and Filter*/
+.search_filter{
+	margin-bottom:20px;
+	width:250px;
+	float:left;
+}
+
+/*Pagination*/
+.pagination{
+	list-style:none;
+	display:flex;
+	justify-content:center;
+	margin-bottom:5rem;
+	font-size:1.2rem;
+	gap:5px;
+}
+
+.pagination .page-num{
+	padding:8px 15px;
+	cursor:pointer;
+	border-radius:3px;
+	font-weight:400;
+}
+
+.pagination .page-num:hover{
+	background-color: #5AB1BB;
+	color:#fff
+}
+
+.pagination .active{
+	background-color: #5AB1BB;
+}
+
+/*Import and Export to CSV*/
+.file_input_output{
+	float:right;
+	margin-right:10%;
+}
+
+.file_input{
+	margin-right:20px;
+}
+
+.import_to_csv{
+	background-color: red;
+	color: white;
+	height:50px;
+	width:100px;
+	padding: 15px 25px;
+	margin-right:50px;
+	margin-bottom:10px;
+	border:none;
+	cursor:pointer;
+}
+
+.export_to_csv{
+	background-color: #199319;
+	color: white;
+	height:20px;
+	padding: 15px 25px;
+	text-decoration: none;
+	margin-left:-30px;
+}
+
+
+
