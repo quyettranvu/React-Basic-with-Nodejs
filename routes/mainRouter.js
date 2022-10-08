@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../models/userModel.js";
-
+import bcrypt from 'bcrypt';
 
 const router=express.Router();
 
@@ -24,7 +24,7 @@ router.post("/user",async(req,res)=>{
             userID,firstName,lastName,email,password
         });
         await newUser.save();
-        return res.status(200).json({msg:'Added a new product.'});
+        return res.status(200).json({msg:'Added a new user.'});
     } catch (error) {
         return res.status(500).json({msg:error.message});
     }
@@ -48,15 +48,20 @@ router.get("/user/:id",async (req,res)=>{
 //Update User
 router.put("/user/:id",async (req,res)=>{
     try {
-        const {userID,firstName,lastName,email,password} = req.body;
+        const {userID,firstName,lastName,email,password,newpassword} = req.body;
 
-        const user=await User.findByIdAndUpdate(req.params.id,{
-            userID,firstName,lastName,email,password
-        },{new:true});
+        const user=await User.findById(req.params.id);
 
         if(!user){
             return res.status(404).json({msg: "This user does not exist."});
         }
+        console.log(user.password);
+        console.log(password)
+        //take new passwod from client and check with current password
+
+        user=await User.findByIdAndUpdate(req.params.id,{
+            newpassword
+        },{new:true});
 
         return res.status(200).json({msg:"Updated this user."})
     } catch (error) {
@@ -78,5 +83,41 @@ router.delete("/user/:id",async (req,res)=>{
         return res.status(500).json({msg:error.message});
     }
 })
+
+//Other APIS
+//API for setting block value
+router.put("/block/user/:id",async (req,res)=>{
+    try {
+        const user=await User.findByIdAndUpdate(req.params.id,{
+            blocked: 1
+        },{new:true});
+
+        if(!user){
+            return res.status(404).json({msg: "This user does not exist."});
+        }
+
+        return res.status(200).json({msg:"Blocked this user."})
+    } catch (error) {
+        return res.status(500).json({msg:error.message});
+    }
+})
+
+//Unblock
+router.put("/unblock/user/:id",async (req,res)=>{
+    try {
+        const user=await User.findByIdAndUpdate(req.params.id,{
+            blocked: 0
+        },{new:true});
+
+        if(!user){
+            return res.status(404).json({msg: "This user does not exist."});
+        }
+
+        return res.status(200).json({msg:"Unblocked this user."})
+    } catch (error) {
+        return res.status(500).json({msg:error.message});
+    }
+})
+
 
 export default router;

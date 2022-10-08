@@ -9,7 +9,6 @@ import userRoutes from './routes/userRouter.js';
 import authRoutes from './routes/authRouter.js';
 import mainRoutes from './routes/mainRouter.js';
 
-
 //Settings with middlewares
 dotenv.config();
 

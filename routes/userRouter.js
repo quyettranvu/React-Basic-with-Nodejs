@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from 'bcrypt';
 import Joi from 'joi'; //most powerful schema description language
-import passwordComplexity from 'joi-password-complexity';
+//import passwordComplexity from 'joi-password-complexity';
 
 import User from '../models/userModel.js';
 const router=express.Router();
@@ -34,7 +34,8 @@ const validate=(data)=>{
         firstName:Joi.string().required().label("First name"),
         lastName: Joi.string().required().label("Last name"),
         email: Joi.string().required().label("Email"),
-        password: passwordComplexity().required().label("Password")
+        //password: passwordComplexity().required().label("Password")
+        password: Joi.string().pattern(/^([0-9][a-zA-Z])+$/).required().label("Password")
     });
     return schema.validate(data);
 }

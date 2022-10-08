@@ -3,6 +3,7 @@ import Joi from 'joi';
 import bcrypt from 'bcrypt';
 
 import User from '../models/userModel.js';
+import generateAuthToken from '../utils/generateAuthToken.js';
 const router=express.Router();
 
 //Login Router
@@ -18,11 +19,19 @@ router.post("/",async(req,res)=>{
         //Check password
         const validPassword=await bcrypt.compare(req.body.password,user.password);
 
-        if(!validPassword) return res.status(401).json({message: "Invalid Email or Password"});
+        if(!validPassword) return res.status(401).send({message: "Invalid Email or Password"});
 
         //Otherwise just generate authentication token
-        const token=user.generateAuthToken();
-        return res.status(200).json({data:token,message:"Login successfully!"});
+        const token=generateAuthToken(user);
+
+        const {_id,firstName,lastName,email,password,role,blocked}=user;
+
+        //send back to client
+        res.json({
+            token,
+            user:{_id,firstName,lastName,email,password,role,blocked}
+        })
+        //console.log(user);
     } catch (error) {
         return res.status(500).json({message:"Internal Server Error"});
     }
@@ -32,7 +41,7 @@ router.post("/",async(req,res)=>{
 const validate=(data)=>{
     const schema=Joi.object({
         email:Joi.string().email().required().label("Email"),
-        password:Joi.string().required().label("Password") 
+        password:Joi.string().label("Password") //Joi.string().pattern(/^([0-9][a-zA-Z])+$/).required().label("Password")
     })
 
     return schema.validate(data);
