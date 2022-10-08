@@ -21,5 +21,11 @@ code {
 /*Mainpage*/
 @import url("./components/MainPage/mainpage.css");
 
+/*MainPage for User*/
+@import url("./components/UserMP/usermp.css");
+
+/*Add User with Null Password*/
+@import url("./components/Popup//popup.css");
+
 /*Update User*/
 @import url("./components//UpdateUser/updateuser.css");

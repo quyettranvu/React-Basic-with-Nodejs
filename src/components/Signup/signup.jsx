@@ -2,6 +2,10 @@ import { Link,useNavigate } from 'react-router-dom';
 import React,{useState} from 'react';
 import axios from 'axios';
 
+/*React Toastify for showing messages*/
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Signup=()=>{
     const [data,setData]=useState({
         userID:"",
@@ -21,13 +25,19 @@ const Signup=()=>{
         e.preventDefault();
 
         try {
-            //const url = "http://localhost:8080/api/users";
-			const { data: res } = await axios.post("/api/users", data);
-            console.log(res.data);
+			await axios.post("/api/users", data);
+            //console.log(res.data);
+            toast.success("Register Successfully",{
+                position:toast.POSITION.TOP_RIGHT,
+                theme: 'dark',
+                autoClose:2000
+            })
             navigate("/login"); //after registering navigate to login page
-            console.log(res.message);
         } catch (error) {
-            alert(error.response.data.msg)
+            //alert(error.response.data.msg)
+            toast.error("Password not matched the pattern numbers and letters alternate and start from number!",{
+                autoClose:2000
+            })
         }
 
     }
