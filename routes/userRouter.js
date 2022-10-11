@@ -35,7 +35,11 @@ const validate=(data)=>{
         lastName: Joi.string().required().label("Last name"),
         email: Joi.string().required().label("Email"),
         //password: passwordComplexity().required().label("Password")
-        password: Joi.string().pattern(/^([0-9][a-zA-Z])+$/).required().label("Password")
+        password: Joi.string().pattern(/^([0-9][a-zA-Z])+$/).required().label("Password"),
+        confirmPassword: Joi.any().equal(Joi.ref('password'))
+            .required()
+            .label("Confirm Password")
+            .options({ messages: { 'any.only': '{{#label}} does not match'} })
     });
     return schema.validate(data);
 }
