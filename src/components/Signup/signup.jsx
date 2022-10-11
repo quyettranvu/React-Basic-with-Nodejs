@@ -12,7 +12,8 @@ const Signup=()=>{
         firstName:"",
         lastName:"",
         email:"",
-        password:""
+        password:"",
+        confirmPassword: ""
     });
 
     const navigate=useNavigate();
@@ -35,7 +36,7 @@ const Signup=()=>{
             navigate("/login"); //after registering navigate to login page
         } catch (error) {
             //alert(error.response.data.msg)
-            toast.error("Password not matched the pattern numbers and letters alternate and start from number!",{
+            toast.error(<div>Possible Errors: <br/> -Password not matched the pattern numbers and letters alternate and start from number!<br /> -Confirm Password does not match password</div>,{
                 autoClose:2000
             })
         }
@@ -104,6 +105,16 @@ const Signup=()=>{
                             name="password"
                             onChange={handleChange}
                             value={data.password}
+                            required
+                            className="input"
+                        />
+
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            name="confirmPassword"
+                            onChange={handleChange}
+                            value={data.confirmPassword}
                             required
                             className="input"
                         />

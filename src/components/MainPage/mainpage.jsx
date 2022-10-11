@@ -10,7 +10,14 @@ import Papa from "papaparse";
 
 //Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faSortDown,faSortUp,faRightFromBracket,faCircleUser,faCircleInfo,faListCheck} from "@fortawesome/free-solid-svg-icons";
+import {
+  faSortDown,
+  faSortUp,
+  faRightFromBracket,
+  faCircleUser,
+  faCircleInfo,
+  faListCheck,
+} from "@fortawesome/free-solid-svg-icons";
 
 //LocalStorage and Cookies
 import { deleteLocalStorage } from "../helpers/setLocationStorage";
@@ -29,6 +36,7 @@ import NTnight from "../images/myphoto/nha-trang-night.jpg";
 const Mainpage = () => {
   const [user, setUser] = useState([]);
   const [popup, setPopup] = useState(false);
+  const [open,setOpen]=useState(false); //handling dropdown menu
   const navigate = useNavigate();
   //let location = useLocation();
   //const { id } = useParams();
@@ -40,7 +48,7 @@ const Mainpage = () => {
     toast.success("Log out successfully", {
       position: toast.POSITION.TOP_RIGHT,
       theme: "dark",
-      autoClose:2000
+      autoClose: 2000,
     });
   };
 
@@ -53,7 +61,7 @@ const Mainpage = () => {
       } catch (err) {
         //alert(err.response.data.msg);
         toast.error("Error in getting users", {
-          autoClose:2000
+          autoClose: 2000,
         });
       }
     };
@@ -74,7 +82,7 @@ const Mainpage = () => {
       toast.success("Delete User Successfully!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "dark",
-        autoClose:2000
+        autoClose: 2000,
       });
       navigate("/home");
     }
@@ -88,19 +96,18 @@ const Mainpage = () => {
       toast.success("Blocked this user successfully!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "dark",
-        autoClose:2000
+        autoClose: 2000,
       });
-      setTimeout(()=>window.location.reload(),2500);
-     }
-    else{
-        await axios.put(`/api/unblock/user/${id}`);
-        toast.success("Unblocked this user successfully!", {
+      setTimeout(() => window.location.reload(), 2500);
+    } else {
+      await axios.put(`/api/unblock/user/${id}`);
+      toast.success("Unblocked this user successfully!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "dark",
-        autoClose:2000
+        autoClose: 2000,
       });
-      setTimeout(()=>window.location.reload(),2500);
-    } 
+      setTimeout(() => window.location.reload(), 2500);
+    }
   };
 
   //Sorting
@@ -110,7 +117,7 @@ const Mainpage = () => {
     toast.success("Sorting successfully!", {
       position: toast.POSITION.TOP_RIGHT,
       theme: "dark",
-      autoClose:2000
+      autoClose: 2000,
     });
   };
 
@@ -120,7 +127,7 @@ const Mainpage = () => {
     toast.success("Sorting successfully!", {
       position: toast.POSITION.TOP_RIGHT,
       theme: "dark",
-      autoClose:2000    
+      autoClose: 2000,
     });
   };
 
@@ -130,7 +137,7 @@ const Mainpage = () => {
     toast.success("Sorting successfully!", {
       position: toast.POSITION.TOP_RIGHT,
       theme: "dark",
-      autoClose:2000
+      autoClose: 2000,
     });
   };
 
@@ -140,7 +147,7 @@ const Mainpage = () => {
     toast.success("Sorting successfully!", {
       position: toast.POSITION.TOP_RIGHT,
       theme: "dark",
-      autoClose:2000
+      autoClose: 2000,
     });
   };
 
@@ -194,7 +201,7 @@ const Mainpage = () => {
     toast.success("Importing successfully!", {
       position: toast.POSITION.TOP_RIGHT,
       theme: "dark",
-      autoClose: 2000
+      autoClose: 2000,
     });
     window.location.reload();
   };
@@ -221,7 +228,33 @@ const Mainpage = () => {
           <h1>Quyet Tran Home Page</h1>
 
           {/* <h2>Welcome {location.state}</h2> */}
-
+          <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+            <img alt="" src={NTnight}></img>
+          </div>
+          <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
+            <h3>
+              Quyet Tran 
+              <br />
+              <span>Beloved Energetic Programmer</span>
+            </h3>
+            <ul>
+              <li className="dropdownItem">
+                <FontAwesomeIcon icon={faCircleUser}/>
+                <a href="/Menu/aboutme.html">About Me</a>
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faListCheck}/>
+                <a href="Menu/task.html">Individual Task</a>
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faCircleInfo}/>
+                <a href="Menu/instruction.html">Usage Instruction</a>
+              </li>
+              {/* <DropdownItem icon={faCircleUser} text={"About Me"} />
+              <DropdownItem icon={faCircleInfo} text={"Individual Task"} />
+              <DropdownItem icon={faListCheck} text={"Usage Instruction"} /> */}
+            </ul>
+          </div>
           <button className="white_btn_in" onClick={handleLogout}>
             <FontAwesomeIcon icon={faRightFromBracket} />
             Logout
@@ -360,5 +393,14 @@ const Mainpage = () => {
     </>
   );
 };
+
+// function DropdownItem(props){
+//   return(
+//     <li className="dropdownItem">
+//       <FontAwesomeIcon icon={props.icon}/>
+//       <a href="/">{props.text}</a>
+//     </li>
+//   )
+// }
 
 export default Mainpage;

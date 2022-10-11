@@ -133,6 +133,17 @@ const Updateuser = () => {
             onChange={(e) => setNewPass(e.target.value)}
           />
         </div>
+        <div className="mb-3">
+          <label className="form-label">Confirmed Password</label>
+          <input
+            name="newpass"
+            type="password"
+            value={newpass}
+            autoComplete="on"
+            className="form-control"
+            onChange={(e) => setNewPass(e.target.value)}
+          />
+        </div>
         <button
           type="submit"
           onClick={updateUser}
